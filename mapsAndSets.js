@@ -1,5 +1,8 @@
-
-let fruitInventory = new Map([["apple", 10], ["banana", 20], ["orange", 30]]);
+let fruitInventory = new Map([
+  ["apple", 10],
+  ["banana", 20],
+  ["orange", 30],
+]);
 let bananaInventory = fruitInventory.get("banana");
 fruitInventory.set("apple", 15);
 //

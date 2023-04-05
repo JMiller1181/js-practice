@@ -42,7 +42,11 @@ let EmailService = {
     ],
   },
   DisplayBoxes: function Show() {
-    console.log(Object.keys(EmailService.Boxes));
+    for (index in EmailService.Boxes) {
+      console.log(index);
+    }
+    //Here is a different way to do it. I thought the above looked neater and was more applicable to the lesson.
+    // console.log(Object.keys(EmailService.Boxes));
   },
   MoveMail: function Move() {
     EmailService.Boxes.Sent.push(EmailService.Boxes.Draft.pop());
@@ -53,17 +57,19 @@ let EmailService = {
     }
   },
   ReadMail: function Read() {
-    console.log(EmailService.Boxes.Sent[1].Content)
+    console.log(EmailService.Boxes.Sent[1].Content);
   },
 };
-console.log("Here is a list of mailbox names:")
+console.log("Here is a list of mailbox names:");
 EmailService.DisplayBoxes();
 console.log("");
 console.log("Here is the list of E-mails in the Sent mailbox");
 EmailService.GetMail();
 console.log("");
 EmailService.MoveMail();
-console.log("Here is the list of E-mails in the Sent mailbox after sending an E-mail:");
+console.log(
+  "Here is the list of E-mails in the Sent mailbox after sending an E-mail:"
+);
 EmailService.GetMail();
 console.log("");
 console.log("Here is the content of the second E-mail in the Sent mailbox:");
