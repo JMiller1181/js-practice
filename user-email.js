@@ -2,7 +2,7 @@ let EmailService = {
   Boxes: {
     Primary: [
       {
-        Title: "A recieved E-mail",
+        Subject: "A recieved E-mail",
         Sender: "You",
         Content: "Words on a page",
         Recipient: "Me",
@@ -10,7 +10,7 @@ let EmailService = {
     ],
     Draft: [
       {
-        Title: "A draft E-mail",
+        Subject: "A draft E-mail",
         Sender: "Me",
         Content: "Some words in an e-mail.",
         Recipient: "You",
@@ -18,15 +18,21 @@ let EmailService = {
     ],
     Sent: [
       {
-        Title: "A sent E-mail",
+        Subject: "A sent E-mail",
         Sender: "Me",
-        Content: "Lorem Ipsum",
+        Content: "Lorem Ipsum, coding is hard.",
+        Recipient: "You",
+      },
+      {
+        Subject: "Another sent E-mail",
+        Sender: "Me",
+        Content: "Lorem Ipsum, coding is fun.",
         Recipient: "You",
       },
     ],
     Spam: [
       {
-        Title: "A spam E-mail",
+        Subject: "A spam E-mail",
         Sender: "U",
         Content: "Words in an E-mail",
         Recipient: "Me",
@@ -34,7 +40,7 @@ let EmailService = {
     ],
     Trash: [
       {
-        Title: "A junk E-mail",
+        Subject: "A junk E-mail",
         Sender: "You",
         Content: "Words I don't need",
         Recipient: "Me",
@@ -53,12 +59,20 @@ let EmailService = {
   },
   GetMail: function List() {
     for (Index of EmailService.Boxes.Sent) {
-      console.log(Index.Title);
+      console.log(Index.Subject);
     }
   },
   ReadMail: function Read() {
     console.log(EmailService.Boxes.Sent[1].Content);
   },
+  DraftEmail: function Draft() {
+    EmailService.Boxes.Draft.push({
+      Subject: "Another draft E-mail",
+      Sender: "Me",
+      Content: "These are words in an E-mail. Drafty draft draft.",
+      Recipient: "You",
+    });
+  }
 };
 console.log("Here is a list of mailbox names:");
 EmailService.DisplayBoxes();
@@ -74,3 +88,7 @@ EmailService.GetMail();
 console.log("");
 console.log("Here is the content of the second E-mail in the Sent mailbox:");
 EmailService.ReadMail();
+EmailService.DraftEmail();
+console.log("");
+console.log("Here is our newly drafted E-mail:")
+console.log(EmailService.Boxes.Draft[0]);

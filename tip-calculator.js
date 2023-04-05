@@ -5,8 +5,9 @@ function caluculateTip(amount) {
 }
 console.log("The tip for the meal is: $" + caluculateTip(bill));
 function getBillTotal(price) {
-  let tip = Math.round(caluculateTip(price));
-  let total = tip + price;
+  let tip = caluculateTip(price).toFixed(2);
+  let trueTip = parseFloat(tip);
+  let total = (trueTip + price).toFixed(2);
   let values = [price, tip, total];
   return values;
 }
