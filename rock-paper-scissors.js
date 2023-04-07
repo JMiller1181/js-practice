@@ -14,8 +14,8 @@ let playerTwo = {
   wins: 0,
 };
 function playRound(p1, p2) {
-  hand1 = playerOne.play();
-  hand2 = playerTwo.play();
+  let hand1 = playerOne.play();
+  let hand2 = playerTwo.play();
   if (hand1 === hand2) {
     console.log(p1.name + " threw: " + hand1 + ".");
     console.log(p2.name + " threw: " + hand2 + ".");
