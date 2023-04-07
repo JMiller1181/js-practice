@@ -14,5 +14,4 @@ function outer() {
   console.log(a);
   console.log(b);
 }
-
 outer();

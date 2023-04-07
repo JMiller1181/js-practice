@@ -13,6 +13,16 @@ let playerTwo = {
   play: getHand,
   wins: 0,
 };
+let playerThree = {
+  name: "Jones",
+  play: getHand,
+  wins: 0,
+};
+let playerFour = {
+  name: "Mufasa",
+  play: getHand,
+  wins: 0,
+};
 function playRound(p1, p2) {
   let hand1 = playerOne.play();
   let hand2 = playerTwo.play();
@@ -43,29 +53,43 @@ function playRound(p1, p2) {
     return p2;
   }
 }
-function playGame() {
-  while (playerOne.wins < 3 && playerTwo.wins < 3) {
-    let winner = playRound(playerOne, playerTwo);
-    if (winner === playerOne) {
-      playerOne.wins += 1;
-    } else if (winner === playerTwo) {
-      playerTwo.wins += 1;
+function playGame(player1, player2, playUntil) {
+  while (player1.wins < playUntil && player2.wins < playUntil) {
+    let winner = playRound(player1, player2);
+    if (winner === player1) {
+      player1.wins += 1;
+    } else if (winner === player2) {
+      player2.wins += 1;
     }
     console.log(
       "The score is: " +
-        playerOne.name +
+        player1.name +
         "- " +
-        playerOne.wins +
+        player1.wins +
         " to " +
-        playerTwo.name +
+        player2.name +
         "- " +
-        playerTwo.wins
+        player2.wins
     );
   }
-  if (playerOne.wins === 3) {
-    console.log("The winner is " + playerOne.name + "!");
+  if (player1.wins === playUntil) {
+    return player1;
   } else {
-    console.log("The winner is " + playerTwo.name + "!");
+    return player2;
   }
 }
-playGame();
+function playTournament(first, second, third, fourth, playUntil) {
+  let firstRound = playGame(first, second, playUntil);
+  console.log("The winner is " + firstRound.name + "!");
+  firstRound.wins = 0;
+  console.log(firstRound.name);
+  let secondRound = playGame(third, fourth, playUntil);
+  console.log(secondRound.name);
+  console.log("The winner is " + secondRound.name + "!");
+  secondRound.wins = 0;
+  let finalRound = playGame(firstRound, secondRound, playUntil);
+  console.log(finalRound.name + " is world champion!");
+
+}
+// playGame(playerOne, playerTwo, 7);
+playTournament(playerOne, playerTwo, playerThree, playerFour, 3);
