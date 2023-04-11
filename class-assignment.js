@@ -1,4 +1,4 @@
-class job {
+class Job {
   constructor(name, industry, requiresDegree, field, salaried) {
     this.name = name;
     this.industry = industry;
@@ -11,7 +11,13 @@ class job {
   }
   getFieldAndIndustry() {
     let fieldAndIndustry = [this.field, this.industry];
-    return fieldAndIndustry;
+    return (
+      "This job is in the " +
+      fieldAndIndustry[0] +
+      " field, in the " +
+      fieldAndIndustry[1] +
+      " industry."
+    );
   }
   needDegree() {
     return this.requiresDegree;
@@ -20,7 +26,7 @@ class job {
     return this.salaried;
   }
 }
-class position extends job {
+class Position extends Job {
   constructor(name, industry, requiresDegree, field, salaried, department) {
     super(name, industry, requiresDegree, field, salaried);
     this.department = department;
@@ -30,28 +36,28 @@ class position extends job {
   }
 }
 
-let envSci = new job(
+let envSci = new Job(
   "Environmental Scientist",
   "Consulting",
   true,
   "Geology",
   true
 );
-let softDev = new job(
+let softDev = new Job(
   "Software Developer",
   "Technology",
   false,
   "Software Development",
   true
 );
-let socPro = new job("Professional Athlete", "Sports", false, "Soccer", true);
+let socPro = new Job("Professional Athlete", "Sports", false, "Soccer", true);
 console.log(envSci.getName());
 console.log(envSci.getFieldAndIndustry());
 console.log(softDev.getName());
 console.log(softDev.getFieldAndIndustry());
 console.log(socPro.getName());
 console.log(socPro.getFieldAndIndustry());
-let PM = new position(
+let PM = new Position(
   "Project Manager",
   "Consulting",
   true,
