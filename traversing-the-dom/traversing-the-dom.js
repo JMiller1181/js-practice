@@ -4,7 +4,8 @@ let currentSection = document.querySelector(".current");
 let nextSection = currentSection.nextElementSibling;
 let prevHSec = currentSection.previousElementSibling.children;
 const highlight = document.querySelector(".highlight").parentElement.parentElement;
-const allHSec = document.querySelectorAll("section h2");
+const allH2Sec = Array.from(document.querySelectorAll("h2")).map((el) => el.parentElement);
+
 //
 console.log(header);
 console.log(sections);
@@ -12,4 +13,4 @@ console.log(currentSection);
 console.log(nextSection);
 console.log(prevHSec);
 console.log(highlight);
-console.log(allHSec);
+console.log(allH2Sec);
