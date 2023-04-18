@@ -14,10 +14,10 @@ function addItem(item) {
   cart.push(item);
   localStorage.setItem("cart", JSON.stringify(cart));
 }
-// remove an item, no button to call it though
-function removeItem() {
+// remove an item, no button to call it though. No idea what you wanted for ID so I just used name.
+function removeItem(name) {
   let cart = initializeCart();
-  cart = cart.pop();
+  cart = cart.filter((item) => item.name !== name);
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 // dispplay the cat contents
