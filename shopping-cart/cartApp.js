@@ -1,31 +1,39 @@
-initializeCart = function () {
-    if ( localStorage.getItem('cart') === null) {
-        localStorage.setItem('cart', []);
-    }
-        return localStorage.getItem('cart');
-};
-
-cart = []
-
-newItem = {
-    name: "",
-    price: 0
+// make the cart or call cart
+function initializeCart() {
+  let emptyCart = [];
+  let cart = localStorage.getItem("cart");
+  if (cart === null) {
+    localStorage.setItem("cart", JSON.stringify(emptyCart));
+    cart = localStorage.getItem("cart");
+  }
+  return JSON.parse(cart);
 }
-
-localStorage = {
-    cart: []
+// add item function
+function addItem(item) {
+  let cart = initializeCart();
+  cart.push(item);
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
-
-addItem = function (newItem) {
-    initializeCart();
-    let itemName = newItem.keys();
-    let itemPrice = newItem.values();
-    cart.push(newItem);
-    localStorage.setItem('cart', cart);
-};
-removeItem = function (remItem) {
-
-};
-displayCart = function () {
-    console.log(localStorage.cart)
-};
+// remove an item, no button to call it though
+function removeItem() {
+  let cart = initializeCart();
+  cart = cart.pop();
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+// dispplay the cat contents
+function displayCart() {
+  let cart = initializeCart();
+  console.log(cart);
+}
+// add item button
+document.querySelector("#addButton").addEventListener("click", () => {
+  const item = {
+    name: document.querySelector("#itemName").value,
+    price: document.querySelector("#itemPrice").value,
+  };
+  addItem(item);
+});
+// display cart button
+document.querySelector("#displayCartButton").addEventListener("click", () => {
+  displayCart();
+});
