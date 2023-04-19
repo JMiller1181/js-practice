@@ -33,6 +33,28 @@ function playRound(p1, p2) {
   let p1Hand = document.createElement("p");
   let p2Hand = document.createElement("p");
   let roundResult = document.createElement("p");
+  // changes the card of player one to the hand they threw
+  switch (hand1) {
+    case "Rock":
+      document.getElementById("playerOneCard").src = "hands/rock.png";
+      break;
+    case "Paper":
+      document.getElementById("playerOneCard").src = "hands/paper.png";
+      break;
+    case "Scissors":
+      document.getElementById("playerOneCard").src = "hands/scissors.png";
+  }
+  // Changes card for player two
+  switch (hand2) {
+    case "Rock":
+      document.getElementById("playerTwoCard").src = "hands/rock.png";
+      break;
+    case "Paper":
+      document.getElementById("playerTwoCard").src = "hands/paper.png";
+      break;
+    case "Scissors":
+      document.getElementById("playerTwoCard").src = "hands/scissors.png";
+  }
   if (hand1 === hand2) {
     p1Hand.innerHTML = p1.name + " threw: " + hand1 + ".";
     p2Hand.innerHTML = p2.name + " threw: " + hand2 + ".";
@@ -64,11 +86,16 @@ function playRound(p1, p2) {
   nextRound.appendChild(p1Hand);
   nextRound.appendChild(p2Hand);
   nextRound.appendChild(roundResult);
+  if (roundWinner !== null) {
+    roundWinner.wins++;
+  }
+  document.querySelector("#pOneScore").innerHTML = p1.wins;
+  document.querySelector("#pTwoScore").innerHTML = p2.wins;
   return roundWinner;
 }
 function playGame(player1, player2, playUntil) {
   let roundEnd = document.createElement("div");
-  let finalWinner = document.createElement("p");
+  let finalWinner = document.querySelector("#matchResult");
   let gameWinner = null;
   while (player1.wins < playUntil && player2.wins < playUntil) {
     let winner = playRound(player1, player2);
@@ -87,8 +114,6 @@ function playGame(player1, player2, playUntil) {
         "- " +
         player2.wins
     );
-    document.querySelector("#pOneScore").innerHTML = player1.wins;
-    document.querySelector("#pTwoScore").innerHTML = player2.wins;
     gameLog.appendChild(roundEnd);
   }
   if (player1.wins === playUntil) {
@@ -97,7 +122,6 @@ function playGame(player1, player2, playUntil) {
     gameWinner = player2;
   }
   finalWinner.innerHTML = gameWinner.name + " is the winner of this match!";
-  roundEnd.appendChild(finalWinner);
   return gameWinner;
 }
 function playTournament(first, second, third, fourth, playUntil) {
@@ -115,20 +139,40 @@ function playTournament(first, second, third, fourth, playUntil) {
 //press register fills in the name
 document.querySelector("#playerNameForm").addEventListener("submit", (e) => {
   e.preventDefault();
-  let registeredName = document.querySelector("input#registerName").value;
+  let registeredName = document.querySelector("#registerName").value;
   playerOne.name = registeredName;
   console.log(playerOne.name);
   document.querySelector("#pOne").innerHTML = playerOne.name;
+  document.querySelector("#registerName").value = "";
 });
 //Enter Number of Rounds
 document.querySelector("#numberRoundsForm").addEventListener("submit", (e) => {
   e.preventDefault();
-  winsNeeded = document.querySelector("input#roundsToWin").value;
+  winsNeeded = document.querySelector("#roundsToWin").value;
   console.log(winsNeeded);
+  document.querySelector("#roundsToWin").value = "";
   return winsNeeded;
 });
 //Press go plays a game
 document.querySelector("#throwHandsButton").addEventListener("click", () => {
-  playGame(playerOne, playerTwo, winsNeeded);
+  playRound(playerOne, playerTwo);
+  // playGame(playerOne, playerTwo, winsNeeded);
+  if (playerOne.wins == winsNeeded) {
+    document.querySelector("#matchResult").innerHTML =
+      playerOne.name + " is the winner of this match!";
+    return playerOne;
+  } else if (playerTwo.wins == winsNeeded) {
+    playerTwo.name + " is the winner of this match!";
+    return playerTwo;
+  } else if (playerOne.wins && playerTwo.wins !== winsNeeded) {
+    document.querySelector("#matchResult").innerHTML =
+      "The score is: " +
+      playerOne.name +
+      "- " +
+      playerOne.wins +
+      " to " +
+      playerTwo.name +
+      "- " +
+      playerTwo.wins;
+  }
 });
-
