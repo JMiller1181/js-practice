@@ -1,0 +1,7 @@
+.title { text-align: center;}
+body { background-color: bisque;}
+#listContainer { width: 30%; display: flex; background-color: seashell; border-bottom: solid; border-color: lightblue;
+    border-width: 2px;}
+#toDoList { background-color: seashell; width: 100%; padding: 0;}
+li {border-bottom: solid; border-color: lightblue; border-width: 2px; width: 100%; list-style: none; margin: 0;}
+.listInput {width: 15%;}
